@@ -49,4 +49,4 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           eb init devops-demo-app --platform docker --region $AWS_REGION
-          eb deploy devops-demo-env
+          eb deploy devops-demo-app-env
