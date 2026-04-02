@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main ]
-
+workflow_dispatch:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
@@ -37,4 +37,3 @@ jobs:
     region: ${{ secrets.AWS_REGION }}    # ← Your AWS region (like us-east-1)
     bucket_name: my-eb-bucket            # ← S3 bucket used by EB to upload app
     bucket_key: my-eb-app-${{ github.sha }}.zip # ← Key name for zip in S3    
-
