@@ -24,6 +24,17 @@ jobs:
       - name: Push image to Docker Hub
         run: docker push vicolat/vicolat:latest
 
-      - name: Deploy to AWS (placeholder)
-        run: echo "Deploy your image to AWS here"O
+- name: Test Docker image
+  run: |
+    docker run --rm mydockerhubuser/myapp:latest npm test
+
+  - name: Deploy to AWS Elastic Beanstalk
+  uses: einaregilsson/beanstalk-deploy@v21
+  with:
+    application_name: my-eb-app          # ← Your Elastic Beanstalk application name
+    environment_name: my-eb-env          # ← Your EB environment name
+    version_label: ${{ github.sha }}     # ← Unique version for each deploy (use SHA)
+    region: ${{ secrets.AWS_REGION }}    # ← Your AWS region (like us-east-1)
+    bucket_name: my-eb-bucket            # ← S3 bucket used by EB to upload app
+    bucket_key: my-eb-app-${{ github.sha }}.zip # ← Key name for zip in S3    
 
