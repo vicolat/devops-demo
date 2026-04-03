@@ -13,8 +13,8 @@ RUN npm install
 # Copy all app files
 COPY . .
 
-# Expose port 3000
-EXPOSE 5000
+# Expose port Elastic Beanstalk
+EXPOSE 8080
 
 # Start the app
 CMD ["npm", "start"]
